@@ -6,7 +6,7 @@ interface iAppProps {
     id: number;
   }
   
-  export const categoryItems: iAppProps[] = [
+const categoryItems: iAppProps[] = [
     {
       id: 0,
       name: "beach",
@@ -112,3 +112,5 @@ interface iAppProps {
         "https://a0.muscache.com/pictures/957f8022-dfd7-426c-99fd-77ed792f6d7a.jpg",
     },
   ];
+
+export default categoryItems;
