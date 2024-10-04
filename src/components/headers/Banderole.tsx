@@ -5,7 +5,7 @@ export const Banderole = () => {
     <span className="text-lg text-black font-medium border-r border-gray-200 pr-5">Anywhere</span>
     <span className="text-lg text-black font-medium border-r border-gray-200 pr-5">Any week</span>
     <span className="text-lg text-black font-medium border-r border-gray-200 pr-5">Add guests</span>
-    <div className="text-lg text-white rounded-full bg-red-600 px-3 py-3 font-medium">
+    <div className="text-lg cursor-pointer text-white rounded-full bg-red-600 px-3 py-3 font-medium">
         <Search size={20} />
     </div>
   </div>
