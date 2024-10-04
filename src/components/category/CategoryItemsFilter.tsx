@@ -21,7 +21,7 @@ export const CategoryItemsFilter = () => {
       {categoryItems.map((item) => (
         <div
         onClick={() => handleClick(item.title)}
-        key={item.id} className={cn("flex hover:bg-gray-100 relative cursor-pointer duration-75 py-3 items-center flex-col gap-2 w-full", 
+        key={item.id} className={cn("flex hover:bg-gray-100 rounded-md relative cursor-pointer duration-75 py-3 items-center flex-col gap-2 w-full", 
         categoryQuery === item.title ? "font-bold text-blue-500" : "")}
         >
           {categoryQuery === item.title && (
