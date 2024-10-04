@@ -11,10 +11,10 @@ export const ProfileHeader = ({sessionUser}: {sessionUser: any}) => {
       <DropdownMenuTrigger>
         <div className="text-lg cursor-pointer text-black font-medium"><Menu size={24} /></div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuItem>Airbnb your home</DropdownMenuItem>
-        <DropdownMenuItem>My reservations</DropdownMenuItem>
-        <DropdownMenuItem>My favorites</DropdownMenuItem>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuItem className="cursor-pointer w-full">Airbnb your home</DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer w-full">My reservations</DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer w-full">My favorites</DropdownMenuItem>
         <DropdownMenuSeparator />
         {sessionUser ? <DropdownMenuItem className="cursor-pointer w-full">
             <SignOutButton />
