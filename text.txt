@@ -1,0 +1,14 @@
+DATABASE_URL="file:./dev.db" <- Pour Sqlite
+
+AUTH_GITHUB_ID=""
+AUTH_GITHUB_SECRET=""
+
+AUTH_GOOGLE_ID=""
+AUTH_GOOGLE_SECRET=""
+
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=""
+STRIPE_SECRET_KEY=""
+
+@stripe/react-stripe-js @stripe/stripe-js stripe axios
+
+Mises a jour V2.0 BoilerPlate : 
