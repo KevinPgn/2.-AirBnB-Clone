@@ -15,11 +15,14 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  // Optional for WebAuthn support
-  Authenticator Authenticator[]
  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  homes Home[]
+  bookings Booking[]
+  reviews Review[]
+  favorites Favorite[]
 }
  
 model Account {
@@ -63,17 +66,78 @@ model VerificationToken {
   @@unique([identifier, token])
 }
  
-// Optional for WebAuthn support
-model Authenticator {
-  id                   String  @id @default(cuid())
-  credentialID         String  @unique
-  userId               String
-  providerAccountId    String
-  credentialPublicKey  String
-  counter              Int
-  credentialDeviceType String
-  credentialBackedUp   Boolean
-  transports           String?
- 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+model Home {
+  id          String   @id @default(cuid())
+  title       String? // e.g., "Beautiful House in the Mountains"
+  description String? // e.g., "This is a beautiful house in the mountains with a view of the lake."
+  photo     String? // url
+  guests      Int? // number of guests
+  bedrooms    Int? // number of bedrooms
+  bathrooms   Int? // number of bathrooms
+  country     String? // e.g., "Flag : United States"
+  price       Int? // price per night
+  address     String? // e.g., "123 Main St, New York, NY 10001"
+  type        String? // e.g., "Entire place", "Private room", "Shared room"
+  
+  instantBooking Boolean? @default(false) // if true, the home can be booked instantly
+
+  ownerId     String
+  owner       User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  
+  bookings    Booking[]
+  reviews     Review[]
+  favorites   Favorite[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Booking {
+  id        String   @id @default(cuid())
+  startDate DateTime // e.g., 2024-10-01
+  endDate   DateTime // e.g., 2024-10-05
+  totalPrice Int // price * (endDate - startDate) by night
+  status    String @default("pending") // e.g., "pending", "confirmed", "cancelled"
+
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  homeId    String
+  home      Home     @relation(fields: [homeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([homeId, userId])
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  rating    Int @default(0) // 1-5
+  comment   String? // optional
+  
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  
+  homeId    String
+  home      Home     @relation(fields: [homeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([homeId, authorId])
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  homeId    String
+  home      Home     @relation(fields: [homeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId, homeId])
 }
