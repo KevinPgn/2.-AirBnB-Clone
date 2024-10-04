@@ -15,6 +15,9 @@ export const ProfileHeader = ({sessionUser}: {sessionUser: any}) => {
         <DropdownMenuItem className="cursor-pointer w-full">Airbnb your home</DropdownMenuItem>
         <DropdownMenuItem className="cursor-pointer w-full">My reservations</DropdownMenuItem>
         <DropdownMenuItem className="cursor-pointer w-full">My favorites</DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer w-full">My Listings</DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem className="cursor-pointer w-full">Reservation activity</DropdownMenuItem>
         <DropdownMenuSeparator />
         {sessionUser ? <DropdownMenuItem className="cursor-pointer w-full">
             <SignOutButton />
