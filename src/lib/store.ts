@@ -1,10 +1,6 @@
 import { create } from "zustand";
 
 interface Store {
-    // Étape actuelle
-    currentStep: number;
-    setCurrentStep: (step: number) => void;
-
     // Première étape
     category: string;
     setCategory: (category: string) => void;
@@ -39,11 +35,9 @@ interface Store {
 
     // Fonctions utilitaires
     reset: () => void;
-    isStepValid: (step: number) => boolean;
 }
 
 const initialState = {
-    currentStep: 1,
     category: '',
     title: '',
     description: '',
@@ -61,7 +55,6 @@ const initialState = {
 export const useStore = create<Store>((set, get) => ({
     ...initialState,
 
-    setCurrentStep: (step) => set({ currentStep: step }),
     setCategory: (category) => set({ category }),
     setTitle: (title) => set({ title }),
     setDescription: (description) => set({ description }),
@@ -76,24 +69,4 @@ export const useStore = create<Store>((set, get) => ({
     setInstantBooking: (instantBooking) => set({ instantBooking }),
 
     reset: () => set(initialState),
-
-    isStepValid: (step) => {
-        const state = get();
-        switch (step) {
-            case 1:
-                return state.category !== '';
-            case 2:
-                return state.title !== '' && state.description !== '';
-            case 3:
-                return state.guests > 0 && state.bedrooms > 0 && state.bathrooms > 0;
-            case 4:
-                return state.photo !== '';
-            case 5:
-                return state.country !== '' && state.price > 0 && state.address !== '' && state.type !== '';
-            case 6:
-                return true; // Instant booking is optional
-            default:
-                return false;
-        }
-    },
 }));
