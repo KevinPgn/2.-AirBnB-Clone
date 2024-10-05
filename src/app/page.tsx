@@ -1,4 +1,5 @@
 import { CategoryItemsFilter } from "@/components/category/CategoryItemsFilter";
+import { ListHomes } from "@/components/listHome/ListHomes";
 import React from "react";
 
 interface HomeProps {
@@ -13,6 +14,7 @@ export default function Home({ searchParams }: HomeProps) {
   return (
     <div className="px-10">
       <CategoryItemsFilter />
+      <ListHomes />
     </div>
   );
 }
