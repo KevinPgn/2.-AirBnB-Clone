@@ -11,13 +11,13 @@ export const CategoryItemsFilter = () => {
 
   const handleClick = (itemName: string) => {
     if(categoryQuery === itemName) {
-      router.push('/');
+      router.push('/?category=Trending');
     } else {
       router.push(`/?category=${itemName}`);
     }
   }
 
- return <div className="flex items-center justify-between mt-3 w-full">
+ return <div className="flex items-center mt-3">
       {categoryItems.map((item) => (
         <div
         onClick={() => handleClick(item.title)}
