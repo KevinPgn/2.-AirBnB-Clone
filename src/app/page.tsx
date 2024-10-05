@@ -14,7 +14,7 @@ export default function Home({ searchParams }: HomeProps) {
   return (
     <div className="px-10">
       <CategoryItemsFilter />
-      <ListHomes />
+      <ListHomes category={category}/>
     </div>
   );
 }

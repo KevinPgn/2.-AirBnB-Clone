@@ -1,7 +1,11 @@
 import React from "react";
 import {Heart} from "lucide-react"
 
-export const ListHomes = () => {
+interface ListHomesProps {
+  category: string | undefined | null;
+}
+
+export const ListHomes = ({category}: ListHomesProps) => {
   return <div className="flex flex-wrap gap-7 mt-10 mb-5 items-start justify-center">
     {Array.from({length: 10}).map((_, index) => (
       <div key={index} className="w-[300px] group relative">
