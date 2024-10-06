@@ -76,11 +76,11 @@ export const FormDescription = () => {
                  variant="outline" size="icon">
                     <Minus size={18} className='text-red-500' />
                 </Button>
-                <span>{guests}</span>
+                <span className='font-bold text-xl'>{guests}</span>
                 <Button
                 onClick={() => setGuests(guests + 1)}
                 variant="outline" size="icon">
-                    <Plus size={18} className='text-green-500' />
+                    <Plus size={18} className='text-red-500' />
                 </Button>
             </div>
         </div>
@@ -97,11 +97,11 @@ export const FormDescription = () => {
                 variant="outline" size="icon">
                     <Minus size={18} className='text-red-500' />
                 </Button>
-                <span>{bedrooms}</span>
+                <span className='font-bold text-xl'>{bedrooms}</span>
                 <Button
                 onClick={() => setBedrooms(bedrooms + 1)}
                 variant="outline" size="icon">
-                    <Plus size={18} className='text-green-500' />
+                    <Plus size={18} className='text-red-500' />
                 </Button>
             </div>
         </div>
@@ -118,11 +118,11 @@ export const FormDescription = () => {
                 variant="outline" size="icon">
                     <Minus size={18} className='text-red-500' />
                 </Button>
-                <span>{bathrooms}</span>
+                <span className='font-bold text-xl'>{bathrooms}</span>
                 <Button
                 onClick={() => setBathrooms(bathrooms + 1)}
                 variant="outline" size="icon">
-                    <Plus size={18} className='text-green-500' />
+                    <Plus size={18} className='text-red-500' />
                 </Button>
             </div>
         </div>
