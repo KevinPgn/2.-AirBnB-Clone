@@ -74,13 +74,13 @@ export const FormDescription = () => {
                 onClick={() => setGuests(guests - 1)}
                 disabled={guests <= 0}
                  variant="outline" size="icon">
-                    <Minus size={18} />
+                    <Minus size={18} className='text-red-500' />
                 </Button>
                 <span>{guests}</span>
                 <Button
                 onClick={() => setGuests(guests + 1)}
                 variant="outline" size="icon">
-                    <Plus size={18} />
+                    <Plus size={18} className='text-green-500' />
                 </Button>
             </div>
         </div>
@@ -95,13 +95,13 @@ export const FormDescription = () => {
                 onClick={() => setBedrooms(bedrooms - 1)}
                 disabled={bedrooms <= 0}
                 variant="outline" size="icon">
-                    <Minus size={18} />
+                    <Minus size={18} className='text-red-500' />
                 </Button>
                 <span>{bedrooms}</span>
                 <Button
                 onClick={() => setBedrooms(bedrooms + 1)}
                 variant="outline" size="icon">
-                    <Plus size={18} />
+                    <Plus size={18} className='text-green-500' />
                 </Button>
             </div>
         </div>
@@ -116,13 +116,13 @@ export const FormDescription = () => {
                 onClick={() => setBathrooms(bathrooms - 1)}
                 disabled={bathrooms <= 0}
                 variant="outline" size="icon">
-                    <Minus size={18} />
+                    <Minus size={18} className='text-red-500' />
                 </Button>
                 <span>{bathrooms}</span>
                 <Button
                 onClick={() => setBathrooms(bathrooms + 1)}
                 variant="outline" size="icon">
-                    <Plus size={18} />
+                    <Plus size={18} className='text-green-500' />
                 </Button>
             </div>
         </div>
