@@ -1,5 +1,5 @@
 import React from 'react'
-import { NextStep } from '@/components/newAirBnBHome/structureForm/NextStep'
+import { NextStepDescription } from '@/components/newAirBnBHome/descriptionForm/NextStepDescription'
 import { FormDescription } from '@/components/newAirBnBHome/descriptionForm/formDescription'
 import Auth from '@/lib/middleware'
 
@@ -10,7 +10,7 @@ const PageDescriptionHome = () => {
             <h1 className="text-3xl font-bold">Please describe your home as good as you can?</h1>
             <FormDescription />
 
-            <NextStep />
+            <NextStepDescription />
         </section>
     </Auth>
   )
