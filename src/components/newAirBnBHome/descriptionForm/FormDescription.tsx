@@ -18,6 +18,8 @@ export const FormDescription = () => {
     bathrooms, setBathrooms
   } = useStore()
 
+// https://images.unsplash.com/photo-1558036117-15d82a90b9b1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
+
   return (
     <div className="space-y-4 mt-5 mb-36">
       <div>
@@ -68,11 +70,16 @@ export const FormDescription = () => {
                 <span>How many guests do you want?</span>
             </div>
             <div className='flex items-center gap-5'>
-                <Button variant="outline" size="icon">
+                <Button
+                onClick={() => setGuests(guests - 1)}
+                disabled={guests <= 0}
+                 variant="outline" size="icon">
                     <Minus size={18} />
                 </Button>
                 <span>{guests}</span>
-                <Button variant="outline" size="icon">
+                <Button
+                onClick={() => setGuests(guests + 1)}
+                variant="outline" size="icon">
                     <Plus size={18} />
                 </Button>
             </div>
@@ -84,11 +91,16 @@ export const FormDescription = () => {
                 <span>How many bedrooms do you want?</span>
             </div>
             <div className='flex items-center gap-5'>
-                <Button variant="outline" size="icon">
+                <Button
+                onClick={() => setBedrooms(bedrooms - 1)}
+                disabled={bedrooms <= 0}
+                variant="outline" size="icon">
                     <Minus size={18} />
                 </Button>
                 <span>{bedrooms}</span>
-                <Button variant="outline" size="icon">
+                <Button
+                onClick={() => setBedrooms(bedrooms + 1)}
+                variant="outline" size="icon">
                     <Plus size={18} />
                 </Button>
             </div>
@@ -100,11 +112,16 @@ export const FormDescription = () => {
                 <span>How many bathrooms do you want?</span>
             </div>
             <div className='flex items-center gap-5'>
-                <Button variant="outline" size="icon">
+                <Button
+                onClick={() => setBathrooms(bathrooms - 1)}
+                disabled={bathrooms <= 0}
+                variant="outline" size="icon">
                     <Minus size={18} />
                 </Button>
                 <span>{bathrooms}</span>
-                <Button variant="outline" size="icon">
+                <Button
+                onClick={() => setBathrooms(bathrooms + 1)}
+                variant="outline" size="icon">
                     <Plus size={18} />
                 </Button>
             </div>
