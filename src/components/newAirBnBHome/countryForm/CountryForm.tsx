@@ -5,12 +5,13 @@ import { useCountries } from '@/lib/countries'
 import { useStore } from '@/lib/store'
 import dynamic from 'next/dynamic'
 import { Input } from '@/components/ui/input'
-
+import { Switch } from '@/components/ui/switch'
 
 export const CountryForm = () => {
   const { getAllCountries, getCountryByValue } = useCountries()
   const { setCountry, setAddress, setType, setInstantBooking } = useStore()
   const [locationValue, setLocationValue] = useState("")
+  const instantBooking = useStore((state) => state.instantBooking)
   
   const LazyMap = dynamic(() => import('./CarteMonde'), {
     loading: () => <p>Chargement de la carte...</p>,
@@ -26,7 +27,7 @@ export const CountryForm = () => {
   }
 
   return (
-    <div className='flex flex-col gap-2 mt-5'>
+    <div className='flex flex-col gap-2 mt-5 mb-40'>
       <Select onValueChange={handleCountrySelect}>  
         <SelectTrigger> <SelectValue placeholder="Select a country" /> </SelectTrigger>
         <SelectContent>
@@ -44,8 +45,10 @@ export const CountryForm = () => {
       </Select>
 
       <LazyMap locationValue={locationValue} />
-      <Input placeholder='Address' className='mt-5 mb-5' />
-      <Select> 
+      <Input 
+      onChange={(e) => setAddress(e.target.value)}
+      placeholder='Address' className='mt-5 mb-5' />
+      <Select onValueChange={(value) => setType(value)}> 
         <SelectTrigger> <SelectValue placeholder="Select a type" /> </SelectTrigger>
         <SelectContent>
           <SelectItem value="Entire place">Entire place</SelectItem>
@@ -53,7 +56,12 @@ export const CountryForm = () => {
           <SelectItem value="Shared room">Shared room</SelectItem>
         </SelectContent>
       </Select>
-      <Input placeholder='Instant Booking' />
+      <div className='flex items-center gap-2 mt-3'>
+        <Switch 
+        checked={instantBooking}
+        onCheckedChange={(checked) => setInstantBooking(checked)} />
+        <span className='text-sm'>Instant Booking</span>
+      </div>
     </div>
   )
 }

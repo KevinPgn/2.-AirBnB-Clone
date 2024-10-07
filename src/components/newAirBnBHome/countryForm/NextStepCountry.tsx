@@ -10,10 +10,13 @@ export const NextStepCountry = () => {
   const type = useStore((state) => state.type)
   const instantBooking = useStore((state) => state.instantBooking)
 
+  const {category, title, description, guests, bedrooms, bathrooms, photo} = useStore((state) => state)
+  console.log({category, title, description, guests, bedrooms, bathrooms, photo, country, address, type, instantBooking})
+  
   const router = useRouter()
 
-  const handleNext = () => {
-    router.push("/host/instantbook")
+  const submit = async () => {
+
   }
 
   return <div className="fixed bottom-0 left-0 w-full bg-white border-t-2 border-gray-200 shadow-md h-[130px] z-10 p-5 flex items-center justify-between">
@@ -21,6 +24,6 @@ export const NextStepCountry = () => {
     <Button
     disabled={!country || !address || !type || !instantBooking}
     className="px-7 py-5 bg-red-500 text-white hover:bg-red-600"
-    onClick={handleNext}>Next</Button>
+    onClick={submit}>Submit</Button>
   </div>
 }
