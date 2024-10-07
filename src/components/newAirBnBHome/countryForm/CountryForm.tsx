@@ -44,7 +44,7 @@ export const CountryForm = () => {
       </Select>
 
       <LazyMap locationValue={locationValue} />
-      <Input placeholder='Address' />
+      <Input placeholder='Address' className='mt-5 mb-5' />
       <Select> 
         <SelectTrigger> <SelectValue placeholder="Select a type" /> </SelectTrigger>
         <SelectContent>
