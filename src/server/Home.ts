@@ -117,7 +117,13 @@ export const getHome = async (homeId: string) => {
                     id: true,
                     
                 }
-            }
+            },
+            bookings: {
+                select: {
+                    startDate: true,
+                    endDate: true,
+                } 
+            },
         }
     })
     return home
