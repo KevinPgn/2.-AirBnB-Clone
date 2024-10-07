@@ -28,8 +28,6 @@ interface Store {
     setAddress: (address: string) => void;
     type: string;
     setType: (type: string) => void;
-
-    // Quatrième étape
     instantBooking: boolean;
     setInstantBooking: (instantBooking: boolean) => void;
 

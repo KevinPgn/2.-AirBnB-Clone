@@ -6,9 +6,16 @@ import { useRouter } from "next/navigation"
 
 export const NextStepCountry = () => {
   const country = useStore((state) => state.country)
+  const address = useStore((state) => state.address)
+  const type = useStore((state) => state.type)
+  const instantBooking = useStore((state) => state.instantBooking)
+
   const router = useRouter()
 
   const handleNext = () => {
+    if (!country || !address || !type || !instantBooking) {
+      return
+    }
     router.push("/host/instantbook")
   }
 

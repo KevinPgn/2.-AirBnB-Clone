@@ -4,11 +4,12 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/c
 import { useCountries } from '@/lib/countries'
 import { useStore } from '@/lib/store'
 import dynamic from 'next/dynamic'
+import { Input } from '@/components/ui/input'
 
 
 export const CountryForm = () => {
   const { getAllCountries, getCountryByValue } = useCountries()
-  const { setCountry } = useStore()
+  const { setCountry, setAddress, setType, setInstantBooking } = useStore()
   const [locationValue, setLocationValue] = useState("")
   
   const LazyMap = dynamic(() => import('./CarteMonde'), {
@@ -43,6 +44,16 @@ export const CountryForm = () => {
       </Select>
 
       <LazyMap locationValue={locationValue} />
+      <Input placeholder='Address' />
+      <Select> 
+        <SelectTrigger> <SelectValue placeholder="Select a type" /> </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="Entire place">Entire place</SelectItem>
+          <SelectItem value="Private room">Private room</SelectItem>
+          <SelectItem value="Shared room">Shared room</SelectItem>
+        </SelectContent>
+      </Select>
+      <Input placeholder='Instant Booking' />
     </div>
   )
 }
