@@ -1,4 +1,4 @@
-import { NextStep } from '@/components/newAirBnBHome/structureForm/NextStep'
+import { NextStepCountry } from '@/components/newAirBnBHome/countryForm/NextStepCountry'
 import Auth from '@/lib/middleware'
 import React from 'react'
 import { CountryForm } from '@/components/newAirBnBHome/countryForm/CountryForm'
@@ -10,7 +10,7 @@ const CountryPage = () => {
         <h1 className="text-3xl font-bold">Where is your home located?</h1>
         <CountryForm />
         
-        <NextStep />
+        <NextStepCountry />
     </section>
   </Auth>
   )
