@@ -9,7 +9,7 @@ export const ListHomes = ({homes}: any) => {
         <div className="absolute top-2 cursor-pointer right-2 bg-white rounded-md p-3 group-hover:opacity-100 opacity-0 duration-75">
             <Heart className="text-black" size={20} />
         </div>
-        {home.photo && <Image src={home.photo} alt={home.title} width={300} height={200} className="rounded-md" />}
+        {home.photo && <Image src={home.photo} alt={home.title} width={300} height={300} className="rounded-md w-[400px] h-[300px] object-cover" />}
         <h2 className="text-lg font-bold mt-4">{home.country} / {home.type}</h2>
         <p className="text-gray-500">{home.description}</p>
         {/* Price / night */}
