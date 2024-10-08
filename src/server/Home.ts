@@ -134,3 +134,27 @@ export const getHome = async (homeId: string) => {
     return home
 }
 
+// Get favorite homes
+export const getFavoriteHomes = async (userId: string) => {
+    const favoriteHomes = await prisma.favorite.findMany({
+        where: {
+            userId
+        },
+        select: {
+            home: {
+                select: {
+                    id: true,
+                    title: true,
+                    description: true,
+                    photo: true,
+                    country: true,
+                    price: true,
+                    type: true,
+                    instantBooking: true,
+                }
+            }
+        }
+    })
+    
+    return favoriteHomes
+}
