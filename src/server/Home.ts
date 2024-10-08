@@ -88,10 +88,10 @@ export const bookHome = authenticatedAction
 export const getHomes = async (category?: string) => {
     const session = await getSession()
     const userId = session?.user?.id
-    
+
     const homes = await prisma.home.findMany({
         where: {
-            ...(category ? {type: category} : {}),
+            ...(category ? { type: category } : {}),
         },
         select: {
             id: true,
@@ -102,7 +102,6 @@ export const getHomes = async (category?: string) => {
             price: true,
             type: true,
             instantBooking: true,
-
             ...(userId ? {
                 favorites: {
                     where: {
@@ -115,10 +114,11 @@ export const getHomes = async (category?: string) => {
             } : {}),
         }
     })
-    return {
-        homes,
-        isFavorite: homes.map((home) => home.favorites.length > 0)
-    }
+
+    return homes.map(home => ({
+        ...home,
+        isFavorite: userId ? home.favorites?.length > 0 : false,
+    }))
 }
 
     // Get a single home

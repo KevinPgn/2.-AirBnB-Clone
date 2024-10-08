@@ -11,14 +11,14 @@ interface HomeProps {
 
 export default async function Home({ searchParams }: HomeProps) {
   const category = searchParams.category as string | undefined;
-  const {homes, isFavorite} = await getHomes(category);
+  const homes = await getHomes(category);
   
   return (
     <div className="px-10">
       <CategoryItemsFilter />
       <div className="flex flex-wrap gap-7 mt-5 mb-5 items-start justify-center">
         {homes.map((home: any) => (
-          <ListHomes key={home.id} home={home} isFavorite={isFavorite}/>
+          <ListHomes key={home.id} home={home}/>
         ))}
       </div>
     </div>
