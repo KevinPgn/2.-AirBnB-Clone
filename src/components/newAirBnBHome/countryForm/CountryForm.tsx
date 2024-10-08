@@ -6,10 +6,11 @@ import { useStore } from '@/lib/store'
 import dynamic from 'next/dynamic'
 import { Input } from '@/components/ui/input'
 import { Switch } from '@/components/ui/switch'
+import categoryItems from '@/lib/categoryItems'
 
 export const CountryForm = () => {
   const { getAllCountries, getCountryByValue } = useCountries()
-  const { setCountry, setAddress, setType, setInstantBooking } = useStore()
+  const { setCountry, setAddress, setInstantBooking } = useStore()
   const [locationValue, setLocationValue] = useState("")
   const instantBooking = useStore((state) => state.instantBooking)
   
@@ -47,16 +48,8 @@ export const CountryForm = () => {
       <LazyMap locationValue={locationValue} />
       <Input 
       onChange={(e) => setAddress(e.target.value)}
-      placeholder='Address' className='mt-5 mb-5' />
-      <Select onValueChange={(value) => setType(value)}> 
-        <SelectTrigger> <SelectValue placeholder="Select a type" /> </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="Entire place">Entire place</SelectItem>
-          <SelectItem value="Private room">Private room</SelectItem>
-          <SelectItem value="Shared room">Shared room</SelectItem>
-        </SelectContent>
-      </Select>
-      <div className='flex items-center gap-2 mt-3'>
+      placeholder='Address' className='mt-3 mb-5' />
+      <div className='flex items-center gap-2'>
         <Switch 
         checked={instantBooking}
         onCheckedChange={(checked) => setInstantBooking(checked)} />
