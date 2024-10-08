@@ -10,24 +10,16 @@ export const putFavoriteHome = authenticatedAction
     }))
     .action(async ({parsedInput: {homeId}, ctx: {userId}}) => {
         const favorite = await prisma.favorite.findFirst({
-            where: {
-                userId,
-                homeId
-            }
+            where: { userId, homeId }
         })
-
+        
         if(favorite) {
             await prisma.favorite.delete({
-                where: {
-                    id: favorite.id
-                }
+                where: { id: favorite.id }
             })
         } else {
             await prisma.favorite.create({
-                data: {
-                    userId,
-                    homeId
-                }
+                data: { userId, homeId }
             })
         }
 

@@ -3,15 +3,14 @@ import {Heart} from "lucide-react"
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { FavoriteHome } from "./FavoriteHome"
 
 export const ListHomes = ({home}: any) => {
   const isFavorite = home.isFavorite
 
   return <div className="flex flex-wrap gap-7 mt-10 mb-5 items-start justify-center">
       <div key={home.id} className="w-[300px] group relative">
-        <div className="absolute top-2 cursor-pointer right-2 bg-white rounded-md p-3 group-hover:opacity-100 opacity-0 duration-75">
-            <Heart className={cn("text-black", isFavorite ? "fill-red-500 text-red-500" : "text-black")} size={20} />
-        </div>
+        <FavoriteHome isFavorite={isFavorite} homeId={home.id}/>
         <Link href={`/home/${home.id}`}>
           {home.photo && <Image src={home.photo} alt={home.title} width={450} height={300} className="rounded-md w-[450px] h-[300px] object-cover" />}
         </Link>
