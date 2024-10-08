@@ -11,12 +11,16 @@ interface HomeProps {
 
 export default async function Home({ searchParams }: HomeProps) {
   const category = searchParams.category as string | undefined;
-  const homes = await getHomes(category);
+  const {homes, isFavorite} = await getHomes(category);
   
   return (
     <div className="px-10">
       <CategoryItemsFilter />
-      <ListHomes homes={homes}/>
+      <div className="flex flex-wrap gap-7 mt-5 mb-5 items-start justify-center">
+        {homes.map((home: any) => (
+          <ListHomes key={home.id} home={home} isFavorite={isFavorite}/>
+        ))}
+      </div>
     </div>
   );
 }

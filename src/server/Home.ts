@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma"
 import {z} from "zod"
 import { authenticatedAction } from "@/lib/safe-actions"
 import { revalidatePath } from "next/cache"
+import { getSession } from "@/components/utils/CacheSession"
 
 export const createHome = authenticatedAction
     .schema(z.object({
@@ -85,6 +86,9 @@ export const bookHome = authenticatedAction
 
 // Get all homes
 export const getHomes = async (category?: string) => {
+    const session = await getSession()
+    const userId = session?.user?.id
+    
     const homes = await prisma.home.findMany({
         where: {
             ...(category ? {type: category} : {}),
@@ -98,9 +102,23 @@ export const getHomes = async (category?: string) => {
             price: true,
             type: true,
             instantBooking: true,
+
+            ...(userId ? {
+                favorites: {
+                    where: {
+                        userId
+                    },
+                    select: {
+                        id: true
+                    }
+                }
+            } : {}),
         }
     })
-    return homes
+    return {
+        homes,
+        isFavorite: homes.map((home) => home.favorites.length > 0)
+    }
 }
 
     // Get a single home
@@ -155,6 +173,6 @@ export const getFavoriteHomes = async (userId: string) => {
             }
         }
     })
-    
+
     return favoriteHomes
 }

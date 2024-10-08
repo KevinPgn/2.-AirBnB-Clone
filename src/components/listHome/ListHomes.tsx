@@ -2,10 +2,10 @@ import React from "react";
 import {Heart} from "lucide-react"
 import Image from "next/image";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
-export const ListHomes = ({homes}: any) => {
+export const ListHomes = ({home, isFavorite}: any) => {
   return <div className="flex flex-wrap gap-7 mt-10 mb-5 items-start justify-center">
-    {homes.map((home: any) => (
       <div key={home.id} className="w-[300px] group relative">
         <div className="absolute top-2 cursor-pointer right-2 bg-white rounded-md p-3 group-hover:opacity-100 opacity-0 duration-75">
             <Heart className="text-black" size={20} />
@@ -21,6 +21,5 @@ export const ListHomes = ({homes}: any) => {
           <span className="text-gray-500">Night</span>
         </div>
       </div>
-    ))}
   </div>
 }
