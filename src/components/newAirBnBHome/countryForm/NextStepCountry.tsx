@@ -18,7 +18,7 @@ export const NextStepCountry = () => {
 
   const submit = async (data: any) => {
     try{
-      const test = await createHome({
+      await createHome({
         title, description, guests, bedrooms, bathrooms, photo, country, address, type, instantBooking, price
       })
     } catch (error) {
