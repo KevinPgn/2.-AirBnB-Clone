@@ -2,6 +2,7 @@ import { CategoryItemsFilter } from "@/components/category/CategoryItemsFilter";
 import { ListHomes } from "@/components/listHome/ListHomes";
 import React from "react";
 import { getHomes } from "@/server/Home";
+import { NoHomesFind } from "@/features/NoHomesFind";
 
 interface HomeProps {
   searchParams: {
@@ -13,6 +14,15 @@ export default async function Home({ searchParams }: HomeProps) {
   const category = searchParams.category as string | undefined;
   const homes = await getHomes(category);
   
+  if(homes.length === 0) {
+    return (
+      <div className="px-10">
+      <CategoryItemsFilter />
+      <NoHomesFind />
+    </div>
+    )
+  }
+
   return (
     <div className="px-10">
       <CategoryItemsFilter />
