@@ -29,7 +29,7 @@ export const FavoriteHome = ({ isFavorite: initialIsFavorite, homeId }: Favorite
       className={cn(
         "absolute top-2 cursor-pointer right-2 bg-white rounded-md p-3",
         "group-hover:opacity-100 opacity-0 duration-75",
-        isPending && "animate-pulse"
+        isPending && "animate-spin"
       )}
     >
       <Heart
