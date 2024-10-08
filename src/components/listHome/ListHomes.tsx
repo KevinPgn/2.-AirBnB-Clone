@@ -11,7 +11,7 @@ export const ListHomes = ({homes}: any) => {
             <Heart className="text-black" size={20} />
         </div>
         <Link href={`/home/${home.id}`}>
-          {home.photo && <Image src={home.photo} alt={home.title} width={300} height={300} className="rounded-md w-[400px] h-[300px] object-cover" />}
+          {home.photo && <Image src={home.photo} alt={home.title} width={450} height={300} className="rounded-md w-[450px] h-[300px] object-cover" />}
         </Link>
           <h2 className="text-lg font-bold mt-4">{home.country} / {home.type}</h2>
           <p className="text-gray-500">{home.description}</p>
