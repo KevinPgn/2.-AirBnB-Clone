@@ -84,8 +84,11 @@ export const bookHome = authenticatedAction
 
 
 // Get all homes
-export const getHomes = async () => {
+export const getHomes = async (category?: string) => {
     const homes = await prisma.home.findMany({
+        where: {
+            ...(category ? {type: category} : {}),
+        },
         select: {
             id: true,
             title: true,
@@ -93,6 +96,8 @@ export const getHomes = async () => {
             photo: true,
             country: true,
             price: true,
+            type: true,
+            instantBooking: true,
         }
     })
     return homes
