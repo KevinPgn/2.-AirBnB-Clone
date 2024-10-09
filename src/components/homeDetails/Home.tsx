@@ -52,7 +52,9 @@ export const Home = ({home}: any) => {
         
             <LazyMap locationValue={home.country} />
         </div>
+
         <div>
+            <h3 className="text-xl font-bold mb-5">When do you want to stay?</h3>
             <DatePickerWithRange />
             <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white mt-5">Book</Button>
         </div>
