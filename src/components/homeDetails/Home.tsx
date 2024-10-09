@@ -18,7 +18,10 @@ export const Home = ({home}: any) => {
 
     <div className="flex justify-between mt-5">
         <div className="flex flex-col gap-1 w-[60%]">
-            <p className="font-bold text-xl">{home.country}</p>
+            <div className="flex items-center gap-2">
+                <p className="font-bold text-xl">{home.country}</p>
+                <span className="text-red-500 font-bold text-xl">{home.price}€ / night</span>
+            </div>
             <div className="flex items-center gap-2">
                 <span className="text-gray-500">{home.guests} guests *</span>
                 <span className="text-gray-500">{home.bedrooms} bedrooms *</span>

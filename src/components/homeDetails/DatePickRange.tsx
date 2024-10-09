@@ -71,7 +71,7 @@ export function DatePickerWithRange({
         </PopoverContent>
       </Popover>
       
-      <Button className="w-full bg-orange-500 text-white hover:bg-orange-600 mt-3" onClick={handleBook}>Book</Button>
+      <Button className="w-full bg-red-500 text-white hover:bg-red-600 mt-3" onClick={handleBook}>Make a reservation</Button>
     </div>
   )
 }
