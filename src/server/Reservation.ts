@@ -5,8 +5,8 @@ import { authenticatedAction } from "@/lib/safe-actions"
 
 export const createBooking = authenticatedAction
     .schema(z.object({
-        startDate: z.date(),
-        endDate: z.date(),
+        startDate: z.coerce.date(),
+        endDate: z.coerce.date(),
         homeId: z.string(),
     }))
     .action(async ({parsedInput: {startDate, endDate, homeId}, ctx:{userId}}) => {
@@ -26,7 +26,7 @@ export const createBooking = authenticatedAction
             throw new Error("You cannot book your own home")
         }
 
-        const totalPrice = home.price * (endDate.getTime() - startDate.getTime())
+        const totalPrice = home.price * Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))
 
         const existingBooking = await prisma.booking.findFirst({
             where: {
@@ -54,5 +54,8 @@ export const createBooking = authenticatedAction
             }
         })
 
-        return booking
+        return {
+            ...booking,
+            message: "Booking created successfully",
+        }
     })
