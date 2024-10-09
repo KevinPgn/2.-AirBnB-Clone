@@ -161,9 +161,7 @@ export const getHome = async (homeId: string) => {
                         userId
                     },
                     select: {
-                        id: true,
-                        startDate: true,
-                        endDate: true,
+                        id: true
                     }
                 }
             } : {}),
