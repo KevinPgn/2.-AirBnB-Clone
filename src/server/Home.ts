@@ -123,6 +123,9 @@ export const getHomes = async (category?: string) => {
 
     // Get a single home
 export const getHome = async (homeId: string) => {
+    const session = await getSession()
+    const userId = session?.user?.id
+    
     const home = await prisma.home.findUnique({
         where: { id: homeId },
         select: {
@@ -138,7 +141,7 @@ export const getHome = async (homeId: string) => {
             owner: {
                 select: {
                     id: true,
-                    
+                    name: true,
                 }
             },
             bookings: {
@@ -147,9 +150,22 @@ export const getHome = async (homeId: string) => {
                     endDate: true,
                 } 
             },
+            ...(userId ? {
+                bookings: {
+                    where: {
+                        userId
+                    },
+                    select: {
+                        id: true
+                    }
+                }
+            } : {}),
         }
     })
-    return home
+    return {
+        ...home,
+        isBooked: userId ? home?.bookings?.length ?? 0 > 0 : false,
+    }
 }
 
 // Get favorite homes
@@ -204,4 +220,6 @@ export const getOwnerBookings = async (userId: string) => {
             }
         }
     })
+
+    return bookings
 }
