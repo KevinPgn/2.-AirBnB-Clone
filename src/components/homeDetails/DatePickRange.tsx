@@ -5,6 +5,8 @@ import { addDays, format } from "date-fns"
 import { Calendar as CalendarIcon } from "lucide-react"
 import { DateRange } from "react-day-picker"
 import { createBooking } from "@/server/Reservation"
+import {ToastContainer, toast} from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -60,15 +62,13 @@ export function DatePickerWithRange({
                   endDate,
                   homeId,
                 })
-                console.log(booking)
-                // Ici, vous pouvez utiliser ces dates formatées pour créer la réservation
-                // await createBooking(homeId, formattedFromDate, formattedToDate);
+                toast.success("Booking created successfully")
             } else {
-        console.log("Please select both start and end dates");
+                toast.error("Please select both start and end dates")
+            }
+        } catch (error) {
+        console.log(error)
     }
-} catch (error) {
-    console.log(error)
-}
 }
 
   return (
@@ -112,6 +112,7 @@ export function DatePickerWithRange({
       </Popover>
       <p className="text-red-500 text-lg">Total price: {totalPrice}€</p>
       <Button className="w-full bg-red-500 text-white hover:bg-red-600 mt-3" onClick={handleBook}>Make a reservation</Button>
+      <ToastContainer />
     </div>
   )
 }
