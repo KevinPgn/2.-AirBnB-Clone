@@ -31,12 +31,26 @@ export const createBooking = authenticatedAction
         const existingBooking = await prisma.booking.findFirst({
             where: {
                 homeId,
-                startDate: {
-                    gte: startDate,
-                },
-                endDate: {
-                    lte: endDate,
-                },
+                OR: [
+                    {
+                        AND: [
+                            { startDate: { lte: startDate } },
+                            { endDate: { gte: startDate } }
+                        ]
+                    },
+                    {
+                        AND: [
+                            { startDate: { lte: endDate } },
+                            { endDate: { gte: endDate } }
+                        ]
+                    },
+                    {
+                        AND: [
+                            { startDate: { gte: startDate } },
+                            { endDate: { lte: endDate } }
+                        ]
+                    }
+                ]
             },
         })
 
