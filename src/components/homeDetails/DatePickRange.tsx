@@ -38,7 +38,6 @@ export function DatePickerWithRange({
         <PopoverTrigger asChild>
           <Button
             id="date"
-            type="button"
             variant={"outline"}
             className={cn(
               "w-[300px] justify-start text-left font-normal",
@@ -71,6 +70,7 @@ export function DatePickerWithRange({
           />
         </PopoverContent>
       </Popover>
+      
       <Button className="w-full bg-orange-500 text-white hover:bg-orange-600 mt-3" onClick={handleBook}>Book</Button>
     </div>
   )
