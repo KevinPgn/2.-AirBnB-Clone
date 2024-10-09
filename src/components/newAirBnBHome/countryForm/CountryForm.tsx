@@ -6,7 +6,6 @@ import { useStore } from '@/lib/store'
 import dynamic from 'next/dynamic'
 import { Input } from '@/components/ui/input'
 import { Switch } from '@/components/ui/switch'
-import categoryItems from '@/lib/categoryItems'
 
 export const CountryForm = () => {
   const { getAllCountries, getCountryByValue } = useCountries()

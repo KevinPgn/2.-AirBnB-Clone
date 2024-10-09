@@ -1,8 +1,9 @@
+import CarteMonde from "@/components/newAirBnBHome/countryForm/CarteMonde"
 import categoryItems from "@/lib/categoryItems"
 
 export const Home = ({home}: any) => {
   const category = categoryItems.find((category) => category.title === home.type)
-
+  
   return <div className="mb-5">
     <h2 className='text-2xl font-bold mb-3'>{home.title}</h2>
     <img src={home.photo} alt={home.title} loading="lazy" width={450} height={300} className='rounded-lg w-full h-[600px] object-cover' />
@@ -40,6 +41,8 @@ export const Home = ({home}: any) => {
             <div className="w-full h-[1px] bg-gray-200 my-7"></div>
             
             <p className="text-gray-700 text-md">{home.description}</p>
+        
+            <CarteMonde locationValue={home.country} />
         </div>
 
         <div></div>
