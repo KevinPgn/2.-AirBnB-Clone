@@ -73,3 +73,33 @@ export const createBooking = authenticatedAction
             message: "Booking created successfully",
         }
     })
+
+export const getOwnerBookings = async (userId: string) => {
+        const bookings = await prisma.booking.findMany({
+            where: {
+                home: {
+                    ownerId: userId
+                }
+            },
+            select: {
+                startDate: true,
+                endDate: true,
+                home: {
+                    select: {
+                        id: true,
+                        title: true,
+                        price: true,
+                    }
+                },
+                user: {
+                    select: {
+                        id: true,
+                        name: true,
+                        email: true,
+                    }
+                }
+            }
+        })
+    
+        return bookings
+    }
