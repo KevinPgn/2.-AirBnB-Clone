@@ -176,3 +176,25 @@ export const getFavoriteHomes = async (userId: string) => {
 
     return favoriteHomes
 }
+
+// Le owner peut prendre toutes les reservations de ses propriétés
+export const getOwnerBookings = async (userId: string) => {
+    const bookings = await prisma.booking.findMany({
+        where: {
+            home: {
+                ownerId: userId
+            }
+        },
+        select: {
+            startDate: true,
+            endDate: true,
+            user: {
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                }
+            }
+        }
+    })
+}
