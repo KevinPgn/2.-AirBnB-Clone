@@ -6,7 +6,7 @@ import dynamic from "next/dynamic"
 
 export const Home = ({home}: any) => {
   const category = categoryItems.find((category) => category.title === home.type)
-
+  console.log(home.bookings)
   const LazyMap = dynamic(() => import('@/components/newAirBnBHome/countryForm/CarteMonde'), {
     loading: () => <p>Chargement de la carte...</p>,
     ssr: false,
@@ -58,7 +58,7 @@ export const Home = ({home}: any) => {
 
         <div>
             <h3 className="text-xl font-bold mb-5">When do you want to stay?</h3>
-            <DatePickerWithRange homeId={home.id} price={home.price}/>
+            <DatePickerWithRange homeId={home.id} price={home.price} bookings={home.bookings}/>
         </div>
     </div>
   </div>

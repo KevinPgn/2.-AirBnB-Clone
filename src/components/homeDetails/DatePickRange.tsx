@@ -19,16 +19,37 @@ export function DatePickerWithRange({
   className,
   homeId,
   price,
-}: any) {
+  bookings,
+}: {
+  className?: string
+  homeId: string
+  price: number
+  bookings: {
+    startDate: Date
+    endDate: Date
+  }[]
+}) {
   const [date, setDate] = React.useState<DateRange | undefined>({
     from: new Date(),
     to: addDays(new Date(), 7),
   })
 
+  const disabledDates = React.useMemo(() => {
+    const dates: Date[] = [];
+    bookings.forEach(booking => {
+      let currentDate = new Date(booking.startDate);
+      while (currentDate <= new Date(booking.endDate)) {
+        dates.push(new Date(currentDate));
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+    });
+    return dates;
+  }, [bookings]);
+
   const totalPrice = date?.from && date?.to
   ? price * Math.ceil((date.to.getTime() - date.from.getTime()) / (1000 * 60 * 60 * 24))
   : 0;  
-  
+
   const handleBook = async () => {
       try {
           if (date?.from && date?.to) {
@@ -85,6 +106,7 @@ export function DatePickerWithRange({
             selected={date}
             onSelect={setDate}
             numberOfMonths={2}
+            disabled={disabledDates}
           />
         </PopoverContent>
       </Popover>
