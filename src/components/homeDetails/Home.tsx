@@ -1,9 +1,17 @@
 import CarteMonde from "@/components/newAirBnBHome/countryForm/CarteMonde"
 import categoryItems from "@/lib/categoryItems"
+import { DatePickerWithRange } from "./DatePickRange"
+import { Button } from "../ui/button"
+import dynamic from "next/dynamic"
 
 export const Home = ({home}: any) => {
   const category = categoryItems.find((category) => category.title === home.type)
-  
+
+  const LazyMap = dynamic(() => import('@/components/newAirBnBHome/countryForm/CarteMonde'), {
+    loading: () => <p>Chargement de la carte...</p>,
+    ssr: false,
+  })
+
   return <div className="mb-5">
     <h2 className='text-2xl font-bold mb-3'>{home.title}</h2>
     <img src={home.photo} alt={home.title} loading="lazy" width={450} height={300} className='rounded-lg w-full h-[600px] object-cover' />
@@ -42,10 +50,12 @@ export const Home = ({home}: any) => {
             
             <p className="text-gray-700 text-md">{home.description}</p>
         
-            <CarteMonde locationValue={home.country} />
+            <LazyMap locationValue={home.country} />
         </div>
-
-        <div></div>
+        <div>
+            <DatePickerWithRange />
+            <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white mt-5">Book</Button>
+        </div>
     </div>
   </div>
 }
