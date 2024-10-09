@@ -26,7 +26,20 @@ export function DatePickerWithRange({
 
   const handleBook = async () => {
     try {
-      console.log(date?.from, date?.to)
+      if (date?.from && date?.to) {
+        const startDate = format(date.from, "yyyy-MM-dd");
+        const endDate = format(date.to, "yyyy-MM-dd");
+        const booking = await createBooking({
+          startDate,
+          endDate,
+          homeId,
+        })
+        console.log(booking)
+        // Ici, vous pouvez utiliser ces dates formatées pour créer la réservation
+        // await createBooking(homeId, formattedFromDate, formattedToDate);
+      } else {
+        console.log("Please select both start and end dates");
+      }
     } catch (error) {
       console.log(error)
     }
