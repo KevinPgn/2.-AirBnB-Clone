@@ -1,12 +1,13 @@
 import CarteMonde from "@/components/newAirBnBHome/countryForm/CarteMonde"
 import categoryItems from "@/lib/categoryItems"
 import { DatePickerWithRange } from "./DatePickRange"
-import { Button } from "../ui/button"
 import dynamic from "next/dynamic"
+import { getSession } from "../utils/CacheSession"
 
-export const Home = ({home}: any) => {
+export const Home = async ({home}: any) => {
   const category = categoryItems.find((category) => category.title === home.type)
   const isBooked = home.isBooked
+  const session = await getSession()
 
   const LazyMap = dynamic(() => import('@/components/newAirBnBHome/countryForm/CarteMonde'), {
     loading: () => <p>Chargement de la carte...</p>,
@@ -58,7 +59,8 @@ export const Home = ({home}: any) => {
 
         <div>
             <h3 className="text-xl font-bold mb-5">When do you want to stay?</h3>
-            <DatePickerWithRange homeId={home.id} price={home.price} bookings={home.bookings} isBooked={isBooked}/>
+            {/* session user id === home.owner.id */}
+            {session?.user?.id === home.owner.id ? <p className="text-red-500 text-sm mt-5">You are the owner of this home</p> : <DatePickerWithRange homeId={home.id} price={home.price} bookings={home.bookings} isBooked={isBooked}/>}
             {isBooked && <p className="text-red-500 text-sm mt-5">Your already demand a booking for this home</p>}
         </div>
     </div>
