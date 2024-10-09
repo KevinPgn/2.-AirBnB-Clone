@@ -18,32 +18,37 @@ import {
 export function DatePickerWithRange({
   className,
   homeId,
+  price,
 }: any) {
   const [date, setDate] = React.useState<DateRange | undefined>({
     from: new Date(),
     to: addDays(new Date(), 7),
   })
 
+  const totalPrice = date?.from && date?.to
+  ? price * Math.ceil((date.to.getTime() - date.from.getTime()) / (1000 * 60 * 60 * 24))
+  : 0;  
+  
   const handleBook = async () => {
-    try {
-      if (date?.from && date?.to) {
-        const startDate = format(date.from, "yyyy-MM-dd");
-        const endDate = format(date.to, "yyyy-MM-dd");
-        const booking = await createBooking({
-          startDate,
-          endDate,
-          homeId,
-        })
-        console.log(booking)
-        // Ici, vous pouvez utiliser ces dates formatées pour créer la réservation
-        // await createBooking(homeId, formattedFromDate, formattedToDate);
-      } else {
+      try {
+          if (date?.from && date?.to) {
+              const startDate = format(date.from, "yyyy-MM-dd");
+              const endDate = format(date.to, "yyyy-MM-dd");
+              const booking = await createBooking({
+                  startDate,
+                  endDate,
+                  homeId,
+                })
+                console.log(booking)
+                // Ici, vous pouvez utiliser ces dates formatées pour créer la réservation
+                // await createBooking(homeId, formattedFromDate, formattedToDate);
+            } else {
         console.log("Please select both start and end dates");
-      }
-    } catch (error) {
-      console.log(error)
     }
-  }
+} catch (error) {
+    console.log(error)
+}
+}
 
   return (
     <div className={cn("grid gap-2", className)}>
@@ -83,7 +88,7 @@ export function DatePickerWithRange({
           />
         </PopoverContent>
       </Popover>
-      
+      <p className="text-red-500 text-lg">Total price: {totalPrice}€</p>
       <Button className="w-full bg-red-500 text-white hover:bg-red-600 mt-3" onClick={handleBook}>Make a reservation</Button>
     </div>
   )

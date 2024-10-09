@@ -58,7 +58,7 @@ export const Home = ({home}: any) => {
 
         <div>
             <h3 className="text-xl font-bold mb-5">When do you want to stay?</h3>
-            <DatePickerWithRange homeId={home.id} />
+            <DatePickerWithRange homeId={home.id} price={home.price}/>
         </div>
     </div>
   </div>
