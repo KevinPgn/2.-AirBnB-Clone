@@ -62,8 +62,8 @@ export function DatePickerWithRange({
                   endDate,
                   homeId,
                 })
-                return booking
                 toast.success("Booking created successfully")
+                return booking
             } else {
                 toast.error("Please select both start and end dates")
             }
