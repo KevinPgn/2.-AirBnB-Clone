@@ -188,6 +188,13 @@ export const getOwnerBookings = async (userId: string) => {
         select: {
             startDate: true,
             endDate: true,
+            home: {
+                select: {
+                    id: true,
+                    title: true,
+                    price: true,
+                }
+            },
             user: {
                 select: {
                     id: true,
