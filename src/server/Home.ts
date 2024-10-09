@@ -134,14 +134,19 @@ export const getHome = async (homeId: string) => {
             description: true,
             photo: true,
             country: true,
+            guests: true,
+            bedrooms: true,
+            bathrooms: true,
             price: true,
             address: true,
             type: true,
             instantBooking: true,
+            createdAt: true,
             owner: {
                 select: {
                     id: true,
                     name: true,
+                    image: true,
                 }
             },
             bookings: {
