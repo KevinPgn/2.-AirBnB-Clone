@@ -30,59 +30,6 @@ export const createHome = authenticatedAction
         return home
     })
 
-// User can book a home
-export const bookHome = authenticatedAction
-    .schema(z.object({
-        homeId: z.string().min(1),
-        startDate: z.date(),
-        endDate: z.date(),
-    }))
-    .action(async ({parsedInput: {homeId, startDate, endDate}, ctx:{userId}}) => {
-        const home = await prisma.home.findUnique({
-            where: {
-                id: homeId
-            }
-        })
-
-        if(!home || !home.price) {
-            throw new Error("Home not found")
-        }
-
-        // Check if the home is already booked for the given dates
-        const existingBooking = await prisma.booking.findFirst({
-            where: {
-                homeId,
-                startDate: {
-                    gte: startDate,
-                    lte: endDate
-                },
-                endDate: {
-                    gte: startDate,
-                    lte: endDate
-                }
-            }
-        })
-
-        if(existingBooking) {
-            throw new Error("Home is already booked for the given dates")
-        }
-        
-        const totalPrice = home.price * (endDate.getTime() - startDate.getTime())
-
-        const booking = await prisma.booking.create({
-            data: {
-                homeId, 
-                startDate, 
-                endDate, 
-                userId,
-                totalPrice,
-            }
-        })
-
-        revalidatePath("/")
-        return booking
-    })
-
 
 // Get all homes
 export const getHomes = async (category?: string) => {
@@ -171,31 +118,6 @@ export const getHome = async (homeId: string) => {
         ...home,
         isBooked: userId ? home?.bookings?.length ?? 0 > 0 : false,
     }
-}
-
-// Get favorite homes
-export const getFavoriteHomes = async (userId: string) => {
-    const favoriteHomes = await prisma.favorite.findMany({
-        where: {
-            userId
-        },
-        select: {
-            home: {
-                select: {
-                    id: true,
-                    title: true,
-                    description: true,
-                    photo: true,
-                    country: true,
-                    price: true,
-                    type: true,
-                    instantBooking: true,
-                }
-            }
-        }
-    })
-
-    return favoriteHomes
 }
 
 // Le owner peut prendre toutes les reservations de ses propriétés
