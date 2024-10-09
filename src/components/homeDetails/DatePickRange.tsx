@@ -22,10 +22,12 @@ export function DatePickerWithRange({
   homeId,
   price,
   bookings,
+  isBooked,
 }: {
   className?: string
   homeId: string
   price: number
+  isBooked: boolean
   bookings: {
     startDate: Date
     endDate: Date
@@ -112,7 +114,11 @@ export function DatePickerWithRange({
         </PopoverContent>
       </Popover>
       <p className="text-red-500 text-lg">Total price: {totalPrice}€</p>
-      <Button className="w-full bg-red-500 text-white hover:bg-red-600 mt-3" onClick={handleBook}>Make a reservation</Button>
+      <Button
+      disabled={isBooked}
+      className="w-full bg-red-500 text-white hover:bg-red-600 mt-3" onClick={handleBook}>
+        {isBooked ? "Already Booked" : "Make a reservation"}
+      </Button>
       <ToastContainer />
     </div>
   )
