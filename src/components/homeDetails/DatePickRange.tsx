@@ -4,6 +4,7 @@ import * as React from "react"
 import { addDays, format } from "date-fns"
 import { Calendar as CalendarIcon } from "lucide-react"
 import { DateRange } from "react-day-picker"
+import { createBooking } from "@/server/Reservation"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -16,11 +17,20 @@ import {
 
 export function DatePickerWithRange({
   className,
-}: React.HTMLAttributes<HTMLDivElement>) {
+  homeId,
+}: any) {
   const [date, setDate] = React.useState<DateRange | undefined>({
-    from: new Date(2022, 0, 20),
-    to: addDays(new Date(2022, 0, 20), 20),
+    from: new Date(),
+    to: addDays(new Date(), 7),
   })
+
+  const handleBook = async () => {
+    try {
+      console.log(date?.from, date?.to)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div className={cn("grid gap-2", className)}>
@@ -28,6 +38,7 @@ export function DatePickerWithRange({
         <PopoverTrigger asChild>
           <Button
             id="date"
+            type="button"
             variant={"outline"}
             className={cn(
               "w-[300px] justify-start text-left font-normal",
@@ -60,6 +71,7 @@ export function DatePickerWithRange({
           />
         </PopoverContent>
       </Popover>
+      <Button className="w-full bg-orange-500 text-white hover:bg-orange-600 mt-3" onClick={handleBook}>Book</Button>
     </div>
   )
 }
