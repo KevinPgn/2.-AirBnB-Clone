@@ -2,6 +2,7 @@ import { getUserBookings } from "@/server/Reservation"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { format, differenceInDays } from "date-fns"
+import { Badge } from "@/components/ui/badge"
 
 const MyReservationsPage = async () => {
   const bookings = await getUserBookings({})
@@ -30,7 +31,9 @@ const MyReservationsPage = async () => {
                         <TableCell>{booking.home.title}</TableCell>
                         <TableCell>{format(booking.startDate, "MMM dd, yyyy")}</TableCell>
                         <TableCell>{format(booking.endDate, "MMM dd, yyyy")}</TableCell>
-                        <TableCell>{booking.status}</TableCell>
+                        <TableCell>
+                            {booking.status === "pending" ? <Badge className="bg-yellow-500">Pending</Badge> : booking.status === "confirmed" ? <Badge className="bg-green-500">Confirmed</Badge> : <Badge className="bg-red-500">Cancelled</Badge>}
+                        </TableCell>
                         <TableCell>{nightPrice(booking)}</TableCell>
                         <TableCell className="flex gap-2">
                             <Button variant="destructive">Cancel</Button>
