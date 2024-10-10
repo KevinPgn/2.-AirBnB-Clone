@@ -103,3 +103,26 @@ export const getOwnerBookings = async (userId: string) => {
     
         return bookings
     }
+
+// get all bookings from the user
+export const getUserBookings = async (userId: string) => {
+    const bookings = await prisma.booking.findMany({
+        where: {
+            userId
+        },
+        select: {
+            startDate: true,
+            endDate: true,
+            status: true,
+            home: {
+                select: {
+                    id: true,
+                    title: true,
+                    price: true,
+                }
+            }
+        }
+    })
+
+    return bookings
+}
