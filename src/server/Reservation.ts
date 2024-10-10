@@ -105,7 +105,9 @@ export const getOwnerBookings = async (userId: string) => {
     }
 
 // get all bookings from the user
-export const getUserBookings = async (userId: string) => {
+export const getUserBookings = authenticatedAction
+    .schema(z.object({}))
+    .action(async ({ctx: {userId}}) => {
     const bookings = await prisma.booking.findMany({
         where: {
             userId
@@ -124,5 +126,5 @@ export const getUserBookings = async (userId: string) => {
         }
     })
 
-    return bookings
-}
+        return bookings
+    })

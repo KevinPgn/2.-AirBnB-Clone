@@ -16,7 +16,9 @@ export const ProfileHeader = ({sessionUser}: {sessionUser: any}) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuItem onClick={() => router.push("/host/structure")} className="cursor-pointer w-full">Airbnb your home</DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer w-full">My reservations</DropdownMenuItem>
+        <DropdownMenuItem
+        onClick={() => router.push("/reservations")}
+        className="cursor-pointer w-full">My reservations</DropdownMenuItem>
         <DropdownMenuItem
         onClick={() => router.push("/favorites")}
         className="cursor-pointer w-full">My favorites</DropdownMenuItem>
