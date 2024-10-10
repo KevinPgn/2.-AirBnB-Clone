@@ -1,4 +1,4 @@
-export const FavoriteHomes = () => {
+export const FavoriteHomes = ({favoriteHomes}: {favoriteHomes: any}) => {
   return <>
   </>
 }
