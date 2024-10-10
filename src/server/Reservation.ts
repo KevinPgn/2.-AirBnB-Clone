@@ -74,7 +74,9 @@ export const createBooking = authenticatedAction
         }
     })
 
-export const getOwnerBookings = async (userId: string) => {
+export const getOwnerBookings = authenticatedAction
+    .schema(z.object({}))
+    .action(async ({ctx: {userId}}) => {
         const bookings = await prisma.booking.findMany({
             where: {
                 home: {
@@ -84,6 +86,7 @@ export const getOwnerBookings = async (userId: string) => {
             select: {
                 startDate: true,
                 endDate: true,
+                status: true,
                 home: {
                     select: {
                         id: true,
@@ -91,18 +94,11 @@ export const getOwnerBookings = async (userId: string) => {
                         price: true,
                     }
                 },
-                user: {
-                    select: {
-                        id: true,
-                        name: true,
-                        email: true,
-                    }
-                }
             }
         })
     
         return bookings
-    }
+    })
 
 // get all bookings from the user
 export const getUserBookings = authenticatedAction
