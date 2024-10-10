@@ -21,6 +21,7 @@ export const ProfileHeader = ({sessionUser}: {sessionUser: any}) => {
         onClick={() => router.push("/favorites")}
         className="cursor-pointer w-full">My favorites</DropdownMenuItem>
         <DropdownMenuItem
+        onClick={() => router.push("/listings")}
         className="cursor-pointer w-full">My Listings</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="cursor-pointer w-full">Reservation activity</DropdownMenuItem>
