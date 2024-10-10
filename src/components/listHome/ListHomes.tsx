@@ -1,13 +1,9 @@
 import React from "react";
-import {Heart} from "lucide-react"
 import Image from "next/image";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
 import { FavoriteHome } from "./FavoriteHome"
 
-export const ListHomes = ({home}: any) => {
-  const isFavorite = home.isFavorite
-
+export const ListHomes = ({home, isFavorite}: any) => {
   return <div className="flex flex-wrap gap-7 mt-10 mb-5 items-start justify-center">
       <div key={home.id} className="w-[300px] group relative">
         <FavoriteHome isFavorite={isFavorite} homeId={home.id}/>

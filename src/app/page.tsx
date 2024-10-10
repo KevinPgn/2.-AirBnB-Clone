@@ -28,7 +28,7 @@ export default async function Home({ searchParams }: HomeProps) {
       <CategoryItemsFilter />
       <div className="flex flex-wrap gap-7 mt-5 mb-5 items-start justify-center">
         {homes.map((home: any) => (
-          <ListHomes key={home.id} home={home}/>
+          <ListHomes key={home.id} home={home} isFavorite={home.isFavorite}/>
         ))}
       </div>
     </div>

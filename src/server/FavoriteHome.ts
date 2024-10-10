@@ -26,7 +26,7 @@ export const putFavoriteHome = authenticatedAction
         revalidatePath(`/home/${homeId}`)
     })
 
-    export const getFavoriteHomes = authenticatedAction
+export const getFavoriteHomes = authenticatedAction
         .schema(z.object({}))
         .action(async ({ctx: {userId}}) => {
             const favoriteHomes = await prisma.favorite.findMany({
@@ -44,10 +44,23 @@ export const putFavoriteHome = authenticatedAction
                         price: true,
                         type: true,
                         instantBooking: true,
+                        ...(userId ? {
+                            favorites: {
+                                where: {
+                                    userId
+                                },
+                                select: {
+                                    id: true
+                                }
+                            }
+                        } : {}),
                     }
                 }
             }
         })
     
-        return favoriteHomes
+        return favoriteHomes.map(home => ({
+            ...home,
+            isFavorite: userId ? home.home.favorites?.length > 0 : false,
+        }))
     })
