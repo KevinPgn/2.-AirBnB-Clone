@@ -18,7 +18,9 @@ export const ProfileHeader = ({sessionUser}: {sessionUser: any}) => {
         <DropdownMenuItem onClick={() => router.push("/host/structure")} className="cursor-pointer w-full">Airbnb your home</DropdownMenuItem>
         <DropdownMenuItem className="cursor-pointer w-full">My reservations</DropdownMenuItem>
         <DropdownMenuItem className="cursor-pointer w-full">My favorites</DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer w-full">My Listings</DropdownMenuItem>
+        <DropdownMenuItem
+        onClick={() => router.push("/favorites")} 
+        className="cursor-pointer w-full">My Listings</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="cursor-pointer w-full">Reservation activity</DropdownMenuItem>
         <DropdownMenuSeparator />

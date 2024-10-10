@@ -26,11 +26,13 @@ export const putFavoriteHome = authenticatedAction
         revalidatePath(`/home/${homeId}`)
     })
 
-    export const getFavoriteHomes = async (userId: string) => {
-        const favoriteHomes = await prisma.favorite.findMany({
-            where: {
-                userId
-            },
+    export const getFavoriteHomes = authenticatedAction
+        .schema(z.object({}))
+        .action(async ({ctx: {userId}}) => {
+            const favoriteHomes = await prisma.favorite.findMany({
+                where: {
+                    userId
+                },
             select: {
                 home: {
                     select: {
@@ -48,4 +50,4 @@ export const putFavoriteHome = authenticatedAction
         })
     
         return favoriteHomes
-    }
+    })
