@@ -36,7 +36,7 @@ const MyReservationsPage = async () => {
                         </TableCell>
                         <TableCell>{nightPrice(booking)}</TableCell>
                         <TableCell className="flex gap-2">
-                            <Button variant="destructive">Cancel</Button>
+                            <Button variant="destructive">Cancel Reservation</Button>
                             <Button>Review</Button>
                         </TableCell>
                     </TableRow>
