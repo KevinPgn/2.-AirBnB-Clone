@@ -126,5 +126,5 @@ export const getUserBookings = authenticatedAction
         }
     })
 
-        return bookings
-    })
+    return bookings;
+})

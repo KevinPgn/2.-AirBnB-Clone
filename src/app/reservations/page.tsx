@@ -5,14 +5,12 @@ import { format, differenceInDays } from "date-fns"
 
 const MyReservationsPage = async () => {
   const bookings = await getUserBookings({})
-  
   const nightPrice = (booking: any) => {
     const startDate = booking.startDate
     const endDate = booking.endDate
     const totalNights = differenceInDays(endDate, startDate)
     return totalNights * booking.home.price
   }
-  
   return (
     <section className="py-10 max-w-[1400px] mx-auto">
         <h1 className="text-2xl font-bold mb-10">My reservations</h1>
